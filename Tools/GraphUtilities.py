@@ -129,7 +129,30 @@ class Graph:
 		return fullstring
 
 
+class Utils:
+	def getGraph(textrep):
+		tokens = textrep.split()
+		if(len(tokens)%2 != 0):
+			print("File not formatted correctly: detected an odd number of tokens")
+			return Graph([])
+		edgs = []
+		i = 2
+		while(i<len(tokens)-1):
+			currentEdge = [tokens[i], tokens[i+1]]
+			edgs.append(currentEdge)
+			i+=2
+		Gr = Graph(edgs)
+		return Gr
 
+	def graphToText(graph):
+		totalstring = ""
+		totalstring+=(str(len(graph.nodes))+"\n")
+		totalstring+=(str(len(graph.edges))+"\n")
+		for e in graph.edges:
+			currentNodes = e.getNodes()
+			totalstring+=(str(currentNodes[0])+" "+str(currentNodes[1])+"\n")
+
+		return totalstring
 
 
 
