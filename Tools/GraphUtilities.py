@@ -18,6 +18,8 @@ class UndirectedEdge:
 			return True
 
 		return False
+
+
 class Node:
 
 	def __init__(self, name):
