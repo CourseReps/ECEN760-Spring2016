@@ -58,6 +58,13 @@ class Graph:
 				return True
 		return False
 
+	def containsEdge(self, edgep):
+		for e in self.edges:
+			if(e.hasNodes(edgep[0], edgep[1])):
+				return True
+
+		return False
+
 	def getNode(self, name):
 		for i in range(0, len(self.nodes)):
 			if(self.nodes[i].getID()==name):
@@ -72,12 +79,13 @@ class Graph:
 
 
 	def addEdge(self, edgep):
-		no1 = self.getNode(edgep[0])
-		no2 = self.getNode(edgep[1])
-		newEdge = UndirectedEdge(edgep[0], edgep[1])
-		self.edges.append(newEdge)
-		no1.addNeighbors(no2.getID())
-		no2.addNeighbors(no1.getID())
+		if(not self.containsEdge(edgep)):
+			no1 = self.getNode(edgep[0])
+			no2 = self.getNode(edgep[1])
+			newEdge = UndirectedEdge(edgep[0], edgep[1])
+			self.edges.append(newEdge)
+			no1.addNeighbors([no2.getID()])
+			no2.addNeighbors([no1.getID()])
 
 	def removeEdge(self, edgep):
 		for i in range(0, len(self.edges)):
@@ -92,8 +100,9 @@ class Graph:
 	def removeNode(self, name):
 		no = self.getNode(name)
 		nbs = no.getNeighbors()
-		for i in range(0, len(nbs)):
-			self.removeEdge([name, nbs[i]])
+		while(len(nbs)>0):
+			self.removeEdge([name, nbs[0]])
+			nbs=no.getNeighbors()
 		self.nodes.remove(no)
 
 	def updateNeighbors(self):
