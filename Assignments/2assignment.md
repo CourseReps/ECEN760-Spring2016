@@ -13,10 +13,16 @@ The nodes on the right side of the graph or check nodes, are formed by adding a 
 
 
 ### Action Items
-
 * __Read__: [Digital Fountain Codes](http://www.inference.phy.cam.ac.uk/mackay/DFountain.html).
 * __Implement__: A class that can generate abstract graphical representations of fountain codes.
 * __Implement__: A class that tracks the evolution of a peeling decoder on a fountain code.
 * __Graph__: Number of recovered packets as a function of codelength ```N in range(0,2000)``` for a code with ```K = 1000```.
 You should run multiple trials to get statistically significant results.
 
+
+### Questions
+* Exercise 50.1 [Digital Fountain Codes](http://www.inference.phy.cam.ac.uk/mackay/DFountain.html).
+* Optimize the degree distribution of a digital fountain code for a file of K = 1000 packets.
+The objective function for this optimization, should be the mean of N, the number of packets required for complete decoding. 
+Report performance with confidence interval.
+* Exercise 50.11 [Digital Fountain Codes](http://www.inference.phy.cam.ac.uk/mackay/DFountain.html).
