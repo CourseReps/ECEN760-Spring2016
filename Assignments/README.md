@@ -8,5 +8,6 @@ Seasoned programmers are strongly encouraged to help their peers and commit thei
 
 ## Tentative Schedule
  * [Assignment 1](./1assignment.md) due Feb 3.
+ * [Assignment 2](./2assignment.md) due Feb 10.
  
  
