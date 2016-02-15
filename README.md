@@ -1,4 +1,4 @@
-# Introcution to Probabilistic Graphical Models
+# Introduction to Probabilistic Graphical Models
 
 ## ECEN760-Spring2016
 
