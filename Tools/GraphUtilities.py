@@ -41,6 +41,7 @@ class Node:
 		self.ID=name
 		self.neighbors=[]
 		self.depth = 0
+		self.value=0
 
 	def addNeighbors(self, nbs):
 		"""Adds a list of neighbors to the current list. Takes a list of node IDs"""
@@ -69,6 +70,9 @@ class Node:
 		"""Assigns depth of node. Takes an integer"""
 		self.depth=d
 
+	def getValue(self):
+		return self.value
+
 
 class Graph:
 	"""Basic graph class.
@@ -80,17 +84,14 @@ class Graph:
 		Iterates through the edges, creates nodes for unique node IDs, and adds all edges and nodes.
 		"""
 		self.size = 0
-		self.nodes = []
+		self.nodes = {}
 		self.edges = []
 		for i in range(0, len(eds)):
 			self.addEdge(eds[i])
 
 	def containsNode(self, name):
 		"""Returns true if node is in graph, false otherwise"""
-		for i in range(0, len(self.nodes)):
-			if(self.nodes[i].getID()==name):
-				return True
-		return False
+		return name in self.nodes
 
 	def containsEdge(self, edgep):
 		"""Checks for an undirected edge in the graph. Takes an edge primitive, which is a list of two node IDs. Order of nodes is irrelevant"""
@@ -112,12 +113,12 @@ class Graph:
 
 	def getNode(self, name):
 		"""Checks if a given node ID exists in the graph. If not, it creates and adds a node for the given ID. Returns the node"""
-		for i in range(0, len(self.nodes)):
-			if(self.nodes[i].getID()==name):
-				return self.nodes[i]
-		newNode = Node(name)
-		self.nodes.append(newNode)
-		return self.nodes[len(self.nodes)-1]
+		if name in self.nodes:
+			return self.nodes[name]
+		else:
+			newNode = Node(name)
+			self.nodes[name]=newNode
+			return newNode
 
 	def getEdges(self):
 		"""Returns list of edges"""
@@ -130,11 +131,11 @@ class Graph:
 	def addNode(self, name):
 		"""Adds a node, based on node ID"""
 		newNode = Node(name)
-		self.nodes.append(newNode)
+		self.nodes[name]=newNode
 
 	def addExistingNode(self, n):
 		"""Adds a node, based on existing Node object"""
-		self.nodes.append(n)
+		self.nodes[n.getID()]=n
 
 	def assignDepths(self, curDepth, curNodeID):
 		"""Recursively assigns depths from the curNodeID, given the curDepth.
@@ -153,13 +154,12 @@ class Graph:
 		"""Adds an edge into the graph, and updates neighbors of relevant nodes.
 		Takes an edge primitive, a list of two node IDs
 		"""
-		if(not self.containsEdge(edgep)):
-			no1 = self.getNode(edgep[0])
-			no2 = self.getNode(edgep[1])
-			newEdge = UndirectedEdge(edgep[0], edgep[1])
-			self.edges.append(newEdge)
-			no1.addNeighbors([no2.getID()])
-			no2.addNeighbors([no1.getID()])
+		no1 = self.getNode(edgep[0])
+		no2 = self.getNode(edgep[1])
+		newEdge = UndirectedEdge(edgep[0], edgep[1])
+		self.edges.append(newEdge)
+		no1.addNeighbors([edgep[1]])
+		no2.addNeighbors([edgep[0]])
 
 	def removeEdge(self, edgep):
 		"""Removes an edge from the graph, and updates the neighbors of relevant nodes
@@ -184,12 +184,12 @@ class Graph:
 		while(len(nbs)>0):
 			self.removeEdge([name, nbs[0]])
 			nbs=no.getNeighbors()
-		self.nodes.remove(no)
+		self.nodes.pop(name)
 
 	def updateNeighbors(self):
 		"""Iterates through edges and updates all neighbors"""
 		#Remove all neighbors
-		for i in range(0, len(self.nodes)):
+		for i in self.nodes:
 			self.nodes[i].replaceNeighbors([])
 
 		#Add new neighbors for each edge
@@ -200,21 +200,13 @@ class Graph:
 			no1.addNeighbors(no2.getID())
 			no2.addNeighbors(no1.getID())
 
-	def printGraph(self):
-		"""Prints graphs nodes, neighbors, and edges. Should use ___str___()"""
-		print("\n\tNODES:")
-		for i in range(0, len(self.nodes)):
-			print(str(self.nodes[i].getID())+"\t"+str(self.nodes[i].getNeighbors()))
-		print("\n\tEDGES:")
-		for i in range(0, len(self.edges)):
-			currentNodes = self.edges[i].getNodes()
-			print(str(currentNodes[0])+" ---- "+str(currentNodes[1]))
 
 	def __str__(self):
 		"""Prints graphs nodes, neighbors, and edges"""
 		fullstring = "\n\tNODES:\n"
-		for i in range(0, len(self.nodes)):
-			fullstring+=(str(self.nodes[i].getID())+"\t"+str(self.nodes[i].getNeighbors())+"\n")
+		for i in self.nodes:
+			x = self.nodes[i].getNeighbors()
+			fullstring+=(str(i)+"\t"+str(x)+"\n")
 		fullstring+="\n\tEDGES:\n"
 		for i in range(0, len(self.edges)):
 			currentNodes = self.edges[i].getNodes()

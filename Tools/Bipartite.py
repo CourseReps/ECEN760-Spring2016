@@ -54,12 +54,14 @@ class BipartiteGraph(Graph):
 		Note that the lists of nodes should be existing nodes, not node IDs.
 		"""
 		Graph.__init__(self, [])
-		self.aNodes=an
-		self.bNodes=bn
+		self.aNodes={}
+		self.bNodes={}
 		for a in an:
-			self.nodes.append(a)
+			self.aNodes[a.getID()]=a
+			self.nodes[a.getID()]=a
 		for b in bn:
-			self.nodes.append(b)
+			self.bNodes[b.getID()]=b
+			self.nodes[b.getID()]=b
 		for e in es:
 			self.addEdge(e)
 
@@ -70,6 +72,18 @@ class BipartiteGraph(Graph):
 	def getBNodes(self):
 		"""Returns list of b nodes"""
 		return self.bNodes
+
+	def addANodes(self, ans):
+		"""Adds a list of a nodes"""
+		for n in ans:
+			self.aNodes[n.getID()]=n
+			self.nodes[n.getID()]=n
+
+	def addBNodes(self, bns):
+		"""Adds a list of b nodes"""
+		for n in bns:
+			self.bNodes[n.getID()]=n
+			self.nodes[n.getID()]=n
 
 
 
