@@ -4,10 +4,11 @@ Enrolled Students and Faculty Members
 
 Students
 -----------------
+* Pranay Kumar Eedara, epranaykumar, [epranaykumar](https://github.com/epranaykumar)
 * Mandel Oats, [mandeloats](https://github.com/mandeloats)
 * Nagaraj Thenkarai Janakiraman, [tjnagaraj](https://github.com/tjnagaraj)
-* Travis Taghavi, travistag, [travistag](https://travistag.github.io/)
-* Mostafa Karimi, mostafa_karimi,[mostafakarimi71](https://github.com/mostafakarimi71)
+* Travis Taghavi, travistag, [travistag](https://github.com/travistag)
+* Mostafa Karimi, mostafa_karimi, [mostafakarimi71](https://github.com/mostafakarimi71)
 
 
 Faculty Members
