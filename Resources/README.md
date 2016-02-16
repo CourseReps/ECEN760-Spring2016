@@ -3,6 +3,10 @@
 
 ## Journal Articles
 
+* S. M. Aji and R. J. McEliece.
+[The generalized distributive law](https://dx.doi.org/10.1109/18.825794).
+IEEE Transactions on Information Theory 46(2):325-343, March 2000.
+
 * F. R. Kschischang, B. J. Frey, and H.-A. Loeliger.
 [Factor graphs and the sum-product algorithm](https://dx.doi.org/10.1109/18.910572).
 IEEE Transactions on Information Theory 47(2):498-519, February 2001.
